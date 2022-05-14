@@ -4,13 +4,13 @@ function MainApp() {
   return (
     <div className="MainApp">
       <aside className="MainApp-leftAside">
-        test application
+        left side
       </aside>
       <div className="MainApp-main">
-
+        main field
       </div>
       <aside className="MainApp-rightAside">
-        vladislav pischaeff 2022 &copy;
+        right side
       </aside>
     </div>
   );

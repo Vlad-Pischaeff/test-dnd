@@ -26,3 +26,16 @@
   min-width: var(--min-width);
   overflow: auto;
 }
+.App-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.App-footer-banner {
+  display: block;
+  background-image: url('./assets/icons/github.png');
+  background-size: cover;
+  width: 1rem; 
+  height: 1rem;
+  margin-right: 1rem;
+}
