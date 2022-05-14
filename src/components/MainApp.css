@@ -1,0 +1,17 @@
+:root {
+  --aside: 10rem;
+  --min-height: 30rem;
+}
+.MainApp {
+  display: flex;
+  height: 100%;
+  min-height: var(--min-height);
+}
+.MainApp-leftAside, .MainApp-rightAside {
+  flex: 0 0 var(--aside);
+  background: rgb(232, 227, 252);
+}
+.MainApp-main {
+  flex: 1 1 auto;
+  background: rgb(223, 252, 252);
+}
