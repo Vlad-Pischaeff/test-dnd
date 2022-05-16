@@ -1,11 +1,14 @@
 import './style.css'
 import { Group } from './Group';
+import { useSelector } from 'react-redux';
 
 function App() {
-  let arr1 = new Array(5).fill(1).map((n, i) => i + 1);
-  let arr2 = new Array(5).fill(1).map((n, i) => i + 1);
-  let arr3 = new Array(5).fill(1).map((n, i) => i + 1);
+  const { items } = useSelector(state => state.entities);
 
+  let arr1 = items.list.filter(n => n.group === 1);
+  let arr2 = items.list.filter(n => n.group === 2);
+  let arr3 = items.list.filter(n => n.group === 3);
+  // console.log('items...', items, arr1, arr2, arr3);
   return (
     <div className="LeftPanel">
       <input className="ElementSearch" type="text" placeholder='Поиск' />

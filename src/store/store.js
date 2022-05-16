@@ -1,8 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import itemsReducer from './slices/items';
+import { listenerMiddleware } from './middleware/middleware';
+import entitiesReducer from './entities';
 
 export const store = configureStore({
   reducer: {
-    items: itemsReducer,
+    entities: entitiesReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().prepend(listenerMiddleware.middleware),
 });
