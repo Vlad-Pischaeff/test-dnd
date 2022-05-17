@@ -10,6 +10,6 @@ export function Element({ n }) {
   }
 
   return (
-    <div className={selected.id === n.id ? "Element active": "Element"} onClick={() => _Click(n.id)}>{n?.name ?? `name${n.id}`}</div>
+    <div className={selected === n.id - 1 ? "Element active": "Element"} onClick={() => _Click(n.id)}>{n?.name ?? `name${n.id}`}</div>
   );
 }

@@ -1,0 +1,32 @@
+.AddItem {
+  font-size: 1.8rem;
+  line-height: 1.8rem;
+  color: gray;
+}
+.DelItem {
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  color: gray;
+  transform: rotate(45deg);
+}
+.AddItem:hover,
+.DelItem:hover {
+  cursor: pointer;
+}
+
+[class*='Port'] {
+  width: 100%;
+  border: 1px solid rgb(199, 199, 199);
+  border-radius: .2rem;
+  padding: .1rem .2rem;
+}
+.Port {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgb(255, 251, 246);
+  height: 1.8rem;
+}
+.Port:not(:last-child) {
+  margin-bottom: .2rem;
+}
