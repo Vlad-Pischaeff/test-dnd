@@ -18,8 +18,14 @@ const items = createSlice({
       const item = list.find(n => n.id === id);
       item[type].push({ name });
     },
+    removeItemPort: (items, { payload }) => {
+      const { list } = items;
+      const { id, type, num } = payload;
+      const item = list.find(n => n.id === id);
+      item[type] = item[type].filter((n, i) => i !== num);
+    }
   }
 })
 
-export const { selectItem, addItemPort } = items.actions;
+export const { selectItem, addItemPort, removeItemPort } = items.actions;
 export default items.reducer;
