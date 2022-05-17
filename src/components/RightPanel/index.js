@@ -2,6 +2,7 @@ import './style.css'
 // import { Group } from './Group';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItemPort, removeItemPort } from '../../store/slices/items';
+import { Port } from './Port';
 
 function App() {
   const dispatch = useDispatch();
@@ -12,21 +13,13 @@ function App() {
 
   const showInputs = () => {
     return isFinite(selected)
-      ? item.inputs.map((n, i) => 
-          <div key={i} className="Port">
-            <p>{n.name}</p>
-            <div className="DelPort" onClick={() => removePort('inputs', i)}>+</div>
-          </div>)
+      ? item.inputs.map((n, i) => <Port key={i} index={i} type='inputs' port={n} />)
       : <div></div>;
   }
 
   const showOutputs = () => {
     return isFinite(selected)
-      ? item.outputs.map((n, i) => 
-          <div key={i} className="Port">
-            <p>{n.name}</p>
-            <div className="DelPort" onClick={() => removePort('outputs', i)}>+</div>
-          </div>)
+      ? item.outputs.map((n, i) => <Port key={i} index={i} type='outputs' port={n} />)
       : <div></div>;
   }
 
@@ -39,9 +32,9 @@ function App() {
     }
   }
 
-  const removePort = (type, num) => {
-    dispatch(removeItemPort({ id: item.id, type, num }));
-  }
+  // const removePort = (type, num) => {
+  //   dispatch(removeItemPort({ id: item.id, type, num }));
+  // }
 
   return (
     <div className="LeftPanel">
