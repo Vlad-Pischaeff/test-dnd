@@ -1,24 +1,22 @@
-.AddItem {
+.AddPort {
   font-size: 1.8rem;
   line-height: 1.8rem;
   color: gray;
 }
-.DelItem {
+.DelPort {
   font-size: 1.5rem;
   line-height: 1.5rem;
   color: gray;
   transform: rotate(45deg);
 }
-.AddItem:hover,
-.DelItem:hover {
+.AddPort:hover,
+.DelPort:hover {
   cursor: pointer;
 }
-
-[class*='Port'] {
+[class^='Port'] {
   width: 100%;
   border: 1px solid rgb(199, 199, 199);
   border-radius: .2rem;
-  padding: .1rem .2rem;
 }
 .Port {
   display: flex;
@@ -26,7 +24,13 @@
   align-items: center;
   background: rgb(255, 251, 246);
   height: 1.8rem;
+  padding: .1rem .2rem;
 }
-.Port:not(:last-child) {
+.PortGroup {
+  padding: .2rem;
+  background: rgb(224, 232, 235);
+}
+.Port:not(:last-child),
+.PortGroup:not(:last-child) {
   margin-bottom: .2rem;
 }

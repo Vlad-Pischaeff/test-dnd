@@ -15,7 +15,7 @@ function App() {
       ? item.inputs.map((n, i) => 
           <div key={i} className="Port">
             <p>{n.name}</p>
-            <div className="DelItem" onClick={() => removePort('inputs', i)}>+</div>
+            <div className="DelPort" onClick={() => removePort('inputs', i)}>+</div>
           </div>)
       : <div></div>;
   }
@@ -25,7 +25,7 @@ function App() {
       ? item.outputs.map((n, i) => 
           <div key={i} className="Port">
             <p>{n.name}</p>
-            <div className="DelItem" onClick={() => removePort('outputs', i)}>+</div>
+            <div className="DelPort" onClick={() => removePort('outputs', i)}>+</div>
           </div>)
       : <div></div>;
   }
@@ -48,16 +48,16 @@ function App() {
       <p>Name{ isFinite(selected) ? item.name : '' }</p>
       <p>Group id #{ isFinite(selected) ? groupName : '' }</p>
       
-      <div className='ElementGroup'>
+      <div className='PortGroup'>
         inputs
         { showInputs() }
-        <span className="AddItem" onClick={() => addPort('inputs')}>+</span>
+        <span className="AddPort" onClick={() => addPort('inputs')}>+</span>
       </div>
 
-      <div className='ElementGroup'>
+      <div className='PortGroup'>
         outputs
         { showOutputs() }
-        <span className="AddItem" onClick={() => addPort('outputs')}>+</span>
+        <span className="AddPort" onClick={() => addPort('outputs')}>+</span>
       </div>
     </div>
   );
