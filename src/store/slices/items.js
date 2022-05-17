@@ -20,9 +20,9 @@ const items = createSlice({
     },
     removeItemPort: (items, { payload }) => {
       const { list } = items;
-      const { id, type, num } = payload;
+      const { id, type, portNum } = payload;
       const item = list.find(n => n.id === id);
-      item[type] = item[type].filter((n, i) => i !== num);
+      item[type] = item[type].filter((n, i) => i !== portNum);
     }
   }
 })

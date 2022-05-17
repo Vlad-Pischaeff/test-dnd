@@ -8,7 +8,7 @@ export const Port = ({ port, index, type }) => {
   const item = isFinite(selected) ? items.list[selected] : {};
 
   const removePort = () => {
-    dispatch(removeItemPort({ id: item.id, type, num: index }));
+    dispatch(removeItemPort({ id: item.id, type, portNum: index }));
   }
 
   return (
