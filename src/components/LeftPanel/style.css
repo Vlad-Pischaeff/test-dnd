@@ -5,7 +5,7 @@
   padding: .1rem .2rem;
 }
 .Element {
-  background: blanchedalmond;
+  background: rgb(255, 251, 246);
   height: 1.8rem;
 }
 .Element:not(:last-child),
@@ -18,5 +18,8 @@
 }
 .ElementGroup {
   padding: .2rem;
-  background: rgb(228, 253, 222);
+  background: rgb(224, 232, 235);
+}
+.active {
+  border: 2px solid rgb(168, 168, 168);
 }
