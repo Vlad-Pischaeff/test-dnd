@@ -12,6 +12,10 @@ const items = createSlice({
     selectItem: (items, { payload }) => {
       items.selected = items.list.findIndex(n => n.id === payload.id);
     },
+    transfetItem: (items, { payload }) => {
+      const { id, group } = payload;
+      console.log('transfetItem...', id, group);
+    },
     addItemPort: (items, { payload }) => {
       const { list } = items;
       const { id, type, name } = payload;
@@ -27,5 +31,5 @@ const items = createSlice({
   }
 })
 
-export const { selectItem, addItemPort, removeItemPort } = items.actions;
+export const { selectItem, transfetItem, addItemPort, removeItemPort } = items.actions;
 export default items.reducer;
