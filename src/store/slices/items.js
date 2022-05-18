@@ -16,7 +16,7 @@ const items = createSlice({
       const { list } = items;
       const { id, type, name } = payload;
       const item = list.find(n => n.id === id);
-      item[type].push({ name });
+      item[type].push(name);
     },
     removeItemPort: (items, { payload }) => {
       const { list } = items;

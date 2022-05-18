@@ -1,30 +1,22 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { addItemPort, removeItemPort } from '../../store/slices/items';
 import { Port } from './Port';
+import { ButtonAddPort } from './ButtonAddPort';
 
-export const PortGroup = ({ type, item, isNotEmpty }) => {
-  const dispatch = useDispatch();
-
-  const showInputs = () => {
-    return isNotEmpty
-      ? item.inputs.map((n, i) => <Port key={i} index={i} type='inputs' port={n} />)
+export const PortGroup = ({ type, item }) => {
+  
+  const showPorts = () => {
+    return item?.id
+      ? item[type].map((port, i) => 
+          <div key={i}>
+            <Port index={i} type={type} port={port} item={item} />
+          </div>)
       : <div></div>;
-  }
-
-  const addPort = () => {
-    if (isNotEmpty) {
-      const length = item[type].length + 1;
-      type === 'inputs'
-        ? dispatch(addItemPort({ id: item.id, type, name: `input ${length}`}))
-        : dispatch(addItemPort({ id: item.id, type, name: `output ${length}`}));
-    }
   }
 
   return (
     <div className='PortGroup'>
-      inputs
-      { showInputs() }
-      <span className="AddPort" onClick={addPort}>+</span>
+      <p>{ type }</p>
+      { showPorts() }
+      <ButtonAddPort item={item} type={type}/>
     </div>
   );
 }

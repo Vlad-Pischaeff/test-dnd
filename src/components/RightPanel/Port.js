@@ -1,11 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { removeItemPort } from '../../store/slices/items';
 
-export const Port = ({ port, index, type }) => {
+export const Port = ({ port, index, type, item }) => {
   const dispatch = useDispatch();
-  const { items } = useSelector(state => state.entities);
-  const { selected } = items;
-  const item = isFinite(selected) ? items.list[selected] : {};
 
   const removePort = () => {
     dispatch(removeItemPort({ id: item.id, type, portNum: index }));
@@ -13,8 +10,10 @@ export const Port = ({ port, index, type }) => {
 
   return (
     <div className="Port">
-      <p>{port.name}</p>
-      <div className="DelPort" onClick={removePort}>+</div>
+      <p>{ port }</p>
+      <div className="DelPort-wrap" onClick={removePort}>
+        <div className="DelPort">+</div>
+      </div>
     </div>
   );
 }

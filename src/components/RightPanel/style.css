@@ -9,8 +9,18 @@
   color: gray;
   transform: rotate(45deg);
 }
+.DelPort-wrap {
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  border-radius: 50% 50%;
+}
+.DelPort-wrap:hover {
+  background: rgb(255, 193, 193);
+}
 .AddPort:hover,
-.DelPort:hover {
+.DelPort-wrap:hover {
   cursor: pointer;
 }
 [class^='Port'] {
