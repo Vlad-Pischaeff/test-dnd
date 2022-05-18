@@ -4,12 +4,15 @@ import { selectItem } from '../../store/slices/items';
 export function Element({ n }) {
   const dispatch = useDispatch();
   const { selected } = useSelector(state => state.entities.items);
+  const itemClass = selected === n.id - 1 
+                      ? "Element active"
+                      : "Element";
 
-  const _Click = index => {
+  const chooseItem = index => {
     dispatch(selectItem({ id: index }));
   }
 
   return (
-    <div className={selected === n.id - 1 ? "Element active": "Element"} onClick={() => _Click(n.id)}>{n?.name ?? `name${n.id}`}</div>
+    <div className={itemClass} onClick={() => chooseItem(n.id)}>{n?.name ?? `name${n.id}`}</div>
   );
 }
