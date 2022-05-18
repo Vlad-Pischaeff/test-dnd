@@ -13,6 +13,9 @@ export function Element({ n }) {
   }
 
   return (
-    <div className={itemClass} onClick={() => chooseItem(n.id)}>{n?.name ?? `name${n.id}`}</div>
+    <div  className={itemClass} 
+          onClick={() => chooseItem(n.id)}>
+      {n?.name ?? `name${n.id}`}
+    </div>
   );
 }
