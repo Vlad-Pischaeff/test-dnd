@@ -19,7 +19,7 @@ export function Group({ array, groupId, groups }) {
 
   return (
     <div className="ElementGroup" onDragOver={setTargetGroup} onDrop={resetTargetGroup} >
-      { groups[groupId] }
+      Group - { groups[groupId] }
       { array.map( n => <Element key={n?.id ?? n} n={n} /> ) }
     </div>
   );

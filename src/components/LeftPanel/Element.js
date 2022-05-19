@@ -31,10 +31,10 @@ export function Element({ n }) {
 
   const dropItem = (n, e) => {
     e.stopPropagation();
-    console.log('dropItem...', transfer);
-    if (transfer.group) {
-      dispatch(transfetItem());
-    }
+    // console.log('Element...drop...', transfer);
+    // if (transfer.group) {
+    dispatch(transfetItem());
+    // }
   }
 
   return (
