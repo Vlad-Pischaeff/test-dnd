@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setTransferParams } from '../../store/slices/items';
+import { setTransferParams, transfetItem } from '../../store/slices/items';
 import { Element } from "./Element";
 
 export function Group({ array, groupId, groups }) {
@@ -12,8 +12,13 @@ export function Group({ array, groupId, groups }) {
     return false;
   }
 
+  const resetTargetGroup = (e) => {
+    dispatch(transfetItem());
+    console.log('group...Drop...', transfer);
+  }
+
   return (
-    <div className="ElementGroup" onDragOver={setTargetGroup} >
+    <div className="ElementGroup" onDragOver={setTargetGroup} onDrop={resetTargetGroup} >
       { groups[groupId] }
       { array.map( n => <Element key={n?.id ?? n} n={n} /> ) }
     </div>

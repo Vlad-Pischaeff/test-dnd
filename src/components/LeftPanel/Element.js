@@ -5,7 +5,7 @@ import { selectItem, setTransferParams, transfetItem } from '../../store/slices/
 export function Element({ n }) {
   const dispatch = useDispatch();
   const { selected, transfer } = useSelector(state => state.entities.items);
-  const itemClass = selected === n.id - 1 ? "Element active" : "Element";
+  const itemClass = selected === n.id ? "Element active" : "Element";
   const refItem = useRef();
 
   const chooseItem = index => {
@@ -30,9 +30,10 @@ export function Element({ n }) {
   }
 
   const dropItem = (n, e) => {
+    e.stopPropagation();
     console.log('dropItem...', transfer);
     if (transfer.group) {
-      dispatch(transfetItem({ id: n.id, group: transfer.group }));
+      dispatch(transfetItem());
     }
   }
 

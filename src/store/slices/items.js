@@ -11,17 +11,24 @@ const items = createSlice({
   },
   reducers: {
     selectItem: (items, { payload }) => {
-      items.selected = items.list.findIndex(n => n.id === payload.id);
+      items.selected = payload.id;
     },
     setTransferParams: (items, { payload }) => {
       const keys = Object.keys(payload);
       const { transfer } = items;
       keys.forEach(key => { transfer[key] = payload[key] });
-      console.log('setTransferParams...', transfer);
     },
-    transfetItem: (items, { payload }) => {
-      const { id, group } = payload;
-      console.log('transfetItem...', id, group);
+    transfetItem: (items, action) => {
+      const { transfer, list } = items;
+      let indexTarget = list.findIndex(n => n.id === transfer.target);
+      let indexSource = list.findIndex(n => n.id === transfer.source);
+      let newGroup = list[indexTarget].group;
+      indexTarget = indexSource < indexTarget && indexTarget - 1;
+      indexTarget = transfer.position === 'after' && indexTarget + 1;
+      const element = list.splice(indexSource, 1);
+      element[0].group = newGroup;
+      list.splice(indexTarget, 0, element[0]);
+      console.log('transfetItem...', transfer);
     },
     addItemPort: (items, { payload }) => {
       const { list } = items;

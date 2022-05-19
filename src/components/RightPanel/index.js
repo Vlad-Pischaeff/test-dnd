@@ -6,7 +6,7 @@ function App() {
   const { items  } = useSelector(state => state.entities);
   const { selected, groups } = items;
   const isItemChosen = isFinite(selected);
-  const item = isItemChosen ? items.list[selected] : {};
+  const item = isItemChosen ? items.list.find(n => n.id === selected) : {};
   const groupName = groups[item.group];
 
   return (
