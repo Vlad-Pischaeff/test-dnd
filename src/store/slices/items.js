@@ -20,16 +20,24 @@ const items = createSlice({
     },
     transfetItem: (items, action) => {
       const { transfer, list } = items;
-      let indexTarget = list.findIndex(n => n.id === transfer.target);
+
       let indexSource = list.findIndex(n => n.id === transfer.source);
-      let newGroup = list[indexTarget].group;
+      const element = list.splice(indexSource, 1);  //...remove array[indexSource] element
 
-      if (indexSource < indexTarget) { indexTarget--; } //...calculate target position for inserted element
-      if (transfer.position === 'after') { indexTarget++; }
+      let indexTarget = list.findIndex(n => n.id === transfer.target);
+      let newGroup = list[indexTarget].group; 
 
-      const element = list.splice(indexSource, 1);  //...remove element from IndexSource
-      element[0].group = newGroup;                  //...set group property of removed element
-      list.splice(indexTarget, 0, element[0]);      //...insert removed element into indexTarget position
+      if (newGroup === +transfer.group) {
+        if (transfer.position === 'after') { 
+          indexTarget++; 
+        }
+        element[0].group = newGroup;                  //...set group property of removed element
+        list.splice(indexTarget, 0, element[0]);      //...insert removed element into indexTarget position
+      } else {
+        element[0].group = +transfer.group;
+        let indexGroup = list.findIndex(n => n.group === +transfer.group);
+        list.splice(indexGroup, 0, element[0]);
+      }
     },
     addItemPort: (items, { payload }) => {
       const { list } = items;
