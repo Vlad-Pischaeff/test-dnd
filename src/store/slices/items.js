@@ -6,11 +6,18 @@ const items = createSlice({
   initialState: {
     "list": data.list,
     "selected": undefined,
-    "groups": { '1': 'Input', '2': 'Standard', '3': 'Output'}
+    "groups": { '1': 'Input', '2': 'Standard', '3': 'Output'},
+    "transfer": { 'source': null, 'target': null, 'position': null, 'group': null},
   },
   reducers: {
     selectItem: (items, { payload }) => {
       items.selected = items.list.findIndex(n => n.id === payload.id);
+    },
+    setTransferParams: (items, { payload }) => {
+      const keys = Object.keys(payload);
+      const { transfer } = items;
+      keys.forEach(key => { transfer[key] = payload[key] });
+      console.log('setTransferParams...', transfer);
     },
     transfetItem: (items, { payload }) => {
       const { id, group } = payload;
@@ -31,5 +38,10 @@ const items = createSlice({
   }
 })
 
-export const { selectItem, transfetItem, addItemPort, removeItemPort } = items.actions;
+export const { 
+  selectItem, 
+  setTransferParams, 
+  transfetItem, 
+  addItemPort, 
+  removeItemPort } = items.actions;
 export default items.reducer;

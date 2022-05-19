@@ -1,56 +1,48 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectItem, transfetItem } from '../../store/slices/items';
+import { selectItem, setTransferParams, transfetItem } from '../../store/slices/items';
 
-export function Element({ n, targetGroup }) {
+export function Element({ n }) {
   const dispatch = useDispatch();
-  const { selected } = useSelector(state => state.entities.items);
-  const [ targetItem, setTargetItem ] = useState({ id: null, pos: null });
-  const itemClass = selected === n.id - 1 
-                      ? "Element active"
-                      : "Element";
+  const { selected, transfer } = useSelector(state => state.entities.items);
+  const itemClass = selected === n.id - 1 ? "Element active" : "Element";
   const refItem = useRef();
 
   const chooseItem = index => {
     dispatch(selectItem({ id: index }));
   }
 
-  const dragItem = (n, e) => {
+  const startDragItem = (n) => {
     refItem.current.style.opacity = 0.6;
+    dispatch(setTransferParams({ source: n.id }));
+  }
+
+  const endDragItem = () => {
+    refItem.current.style.opacity = 1;
   }
 
   const hoverItem = (n, e) => {
+    e.preventDefault();
     const { offsetTop, offsetHeight } = refItem.current;
-    if ( offsetTop + offsetHeight/2 > e.clientY) {
-      // console.log('client...', n.id, 'before...');
-      setTargetItem({ id: n.id, pos: 'before' });
-    } else {
-      // console.log('client...', n.id, 'after...');
-      setTargetItem({ id: n.id, pos: 'after' });
-    }
-    // console.log('DragOver...', 
-    //   n.id, 
-    //   refItem.current.offsetTop,
-    //   'height', refItem.current.offsetHeight,
-    //   refItem.current.offsetLeft,
-    //   'width', refItem.current.offsetWidth,
-    //   e.clientY);
+    offsetTop + offsetHeight/2 > e.clientY
+      ? (transfer.position !== 'before' && dispatch(setTransferParams({ target: n.id, position: 'before' })))
+      : (transfer.position !== 'after' && dispatch(setTransferParams({ target: n.id, position: 'after' })));
   }
 
   const dropItem = (n, e) => {
-    refItem.current.style.opacity = 1;
-    console.log('dropItem...', targetGroup, n);
-    if (targetGroup) {
-      dispatch(transfetItem({ id: n.id, group: targetGroup }));
+    console.log('dropItem...', transfer);
+    if (transfer.group) {
+      dispatch(transfetItem({ id: n.id, group: transfer.group }));
     }
   }
 
   return (
     <div  className={itemClass} draggable="true" ref={refItem}
           onClick={() => chooseItem(n.id)}
-          onDragStart={e => dragItem(n, e)}
+          onDragStart={() => startDragItem(n)}
+          onDragEnd={endDragItem}
           onDragOver={e => hoverItem(n, e)}
-          onDragEnd={e => dropItem(n, e)}
+          onDrop={e => dropItem(n, e)}
           >
       {n?.name ?? `name${n.id}`}
     </div>
