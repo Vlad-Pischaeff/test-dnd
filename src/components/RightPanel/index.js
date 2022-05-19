@@ -11,7 +11,7 @@ function App() {
 
   return (
     <div className="LeftPanel">
-      <p>Name{ isItemChosen ? item.name : '' }</p>
+      <p>Name { isItemChosen ? item.name : '' }</p>
       <p>Group id #{ isItemChosen ? groupName : '' }</p>
       <PortGroup item={item} type='inputs'/>
       <PortGroup item={item} type='outputs'/>
