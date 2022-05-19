@@ -9,18 +9,22 @@ export function Group({ array, groupId, groups }) {
   const setTargetGroup = (e) => {
     e.preventDefault();
     transfer.group !== groupId && dispatch(setTransferParams({ 'group': groupId }));
-    return false;
   }
 
   const resetTargetGroup = (e) => {
     dispatch(transfetItem());
-    console.log('group...Drop...', transfer);
+    // console.log('group...Drop...', transfer);
   }
 
   return (
-    <div className="ElementGroup" onDragOver={setTargetGroup} onDrop={resetTargetGroup} >
+    <div  className="ElementGroup"
+          onDragOver={setTargetGroup} 
+          onDrop={resetTargetGroup} >
+
       Group - { groups[groupId] }
+      
       { array.map( n => <Element key={n?.id ?? n} n={n} /> ) }
+
     </div>
   );
 }
