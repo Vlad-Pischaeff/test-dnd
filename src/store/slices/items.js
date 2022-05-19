@@ -23,12 +23,13 @@ const items = createSlice({
       let indexTarget = list.findIndex(n => n.id === transfer.target);
       let indexSource = list.findIndex(n => n.id === transfer.source);
       let newGroup = list[indexTarget].group;
-      indexTarget = indexSource < indexTarget && indexTarget - 1;
-      indexTarget = transfer.position === 'after' && indexTarget + 1;
-      const element = list.splice(indexSource, 1);
-      element[0].group = newGroup;
-      list.splice(indexTarget, 0, element[0]);
-      console.log('transfetItem...', transfer);
+
+      if (indexSource < indexTarget) { indexTarget--; } //...calculate target position for inserted element
+      if (transfer.position === 'after') { indexTarget++; }
+
+      const element = list.splice(indexSource, 1);  //...remove element from IndexSource
+      element[0].group = newGroup;                  //...set group property of removed element
+      list.splice(indexTarget, 0, element[0]);      //...insert removed element into indexTarget position
     },
     addItemPort: (items, { payload }) => {
       const { list } = items;
